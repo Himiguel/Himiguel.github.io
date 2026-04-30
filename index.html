@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Himiguel · Cybersecurity Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #0a0e14;
+  --bg2: #0f1520;
+  --bg3: #151d2e;
+  --accent: #00d4aa;
+  --accent2: #0099ff;
+  --text: #ccd6f6;
+  --muted: #8892b0;
+  --border: rgba(0, 212, 170, 0.15);
+  --mono: 'Share Tech Mono', monospace;
+  --sans: 'DM Sans', sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+  pointer-events: none;
+  z-index: 9999;
+}
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(10, 14, 20, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { font-family: var(--mono); font-size: 1rem; color: var(--accent); letter-spacing: 0.05em; }
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s; }
+.nav-links a:hover { color: var(--accent); }
+
+/* ── HERO con foto ── */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 8rem 2rem 4rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.hero-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  width: 100%;
+}
+.hero-text { flex: 1; }
+.hero-photo-wrap {
+  flex-shrink: 0;
+  position: relative;
+}
+.hero-photo {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  border: 2px solid var(--accent);
+  display: block;
+  filter: grayscale(20%);
+  transition: filter 0.3s;
+}
+.hero-photo:hover { filter: grayscale(0%); }
+/* anillo pulsante exterior */
+.hero-photo-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 212, 170, 0.25);
+  animation: pulse-ring 3s ease-out infinite;
+}
+@keyframes pulse-ring {
+  0%   { transform: scale(1);    opacity: 0.6; }
+  70%  { transform: scale(1.08); opacity: 0;   }
+  100% { transform: scale(1.08); opacity: 0;   }
+}
+
+.hero-prompt { font-family: var(--mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 1rem; letter-spacing: 0.05em; }
+.hero-name { font-family: var(--sans); font-size: clamp(2.2rem, 6vw, 4.5rem); font-weight: 300; line-height: 1.1; letter-spacing: -0.02em; color: #e0e8ff; margin-bottom: 0.5rem; }
+.hero-name strong { font-weight: 500; color: #fff; }
+.hero-role { font-family: var(--mono); font-size: clamp(0.9rem, 2vw, 1.1rem); color: var(--accent); margin-bottom: 1.5rem; }
+.hero-cursor { display: inline-block; width: 10px; height: 1.1em; background: var(--accent); vertical-align: text-bottom; animation: blink 1s step-end infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.hero-desc { max-width: 480px; color: var(--muted); font-size: 1rem; margin-bottom: 2rem; line-height: 1.8; }
+.hero-badges { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2rem; }
+.status-badge { font-family: var(--mono); font-size: 0.72rem; padding: 0.3rem 0.75rem; border: 1px solid var(--accent); color: var(--accent); border-radius: 3px; letter-spacing: 0.05em; }
+.status-badge.blue { border-color: var(--accent2); color: var(--accent2); }
+.hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.1em; padding: 0.75rem 1.75rem; text-decoration: none; border-radius: 3px; transition: all 0.2s; cursor: pointer; }
+.btn-primary { background: var(--accent); color: var(--bg); border: 1px solid var(--accent); }
+.btn-primary:hover { background: transparent; color: var(--accent); }
+.btn-outline { background: transparent; color: var(--text); border: 1px solid var(--muted); }
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+section { max-width: 900px; margin: 0 auto; padding: 5rem 2rem; }
+.section-label { font-family: var(--mono); font-size: 0.8rem; color: var(--accent); letter-spacing: 0.15em; margin-bottom: 0.5rem; }
+.section-title { font-size: 2rem; font-weight: 300; color: #e0e8ff; margin-bottom: 3rem; display: flex; align-items: center; gap: 1rem; }
+.section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.about-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 3rem; align-items: start; }
+.about-text p { color: var(--muted); margin-bottom: 1.25rem; line-height: 1.85; }
+.about-text p span { color: var(--accent); }
+.about-stats { display: flex; flex-direction: column; gap: 1rem; }
+.stat-card { border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem; background: var(--bg2); }
+.stat-label { font-family: var(--mono); font-size: 0.7rem; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 0.25rem; }
+.stat-value { font-size: 0.95rem; color: var(--text); }
+.cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+.cert-card { border: 1px solid var(--border); border-radius: 6px; padding: 1.5rem; background: var(--bg2); position: relative; overflow: hidden; transition: border-color 0.3s, transform 0.2s; }
+.cert-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.cert-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+.cert-status { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; padding: 0.2rem 0.6rem; border-radius: 3px; margin-bottom: 1rem; display: inline-block; }
+.cert-status.in-progress { background: rgba(0,153,255,0.1); border: 1px solid rgba(0,153,255,0.3); color: var(--accent2); }
+.cert-status.earned { background: rgba(0,212,170,0.1); border: 1px solid rgba(0,212,170,0.3); color: var(--accent); }
+.cert-name { font-size: 1.05rem; font-weight: 500; color: #e0e8ff; margin-bottom: 0.25rem; }
+.cert-code { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); }
+.credly-section { margin-top: 2rem; }
+.credly-title { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 1.5rem; }
+.credly-badges { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: flex-start; }
+.thm-wrapper { border: 1px solid var(--border); border-radius: 6px; padding: 2rem; background: var(--bg2); display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+.thm-wrapper img { border-radius: 6px; max-width: 100%; }
+.thm-link { font-family: var(--mono); font-size: 0.8rem; color: var(--accent); text-decoration: none; border: 1px solid var(--accent); padding: 0.5rem 1.5rem; border-radius: 3px; transition: all 0.2s; }
+.thm-link:hover { background: var(--accent); color: var(--bg); }
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+.skill-group { border: 1px solid var(--border); border-radius: 6px; padding: 1.5rem; background: var(--bg2); }
+.skill-group-title { font-family: var(--mono); font-size: 0.7rem; color: var(--accent); letter-spacing: 0.15em; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+.skill-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.skill-item { font-size: 0.9rem; color: var(--muted); display: flex; align-items: center; gap: 0.6rem; }
+.skill-item::before { content: '›'; color: var(--accent); font-family: var(--mono); font-size: 1rem; }
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+.coming-soon { text-align: center; padding: 3rem; border: 1px dashed var(--border); border-radius: 6px; color: var(--muted); font-family: var(--mono); font-size: 0.85rem; grid-column: 1 / -1; }
+.contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+.contact-text { color: var(--muted); font-size: 1.05rem; line-height: 1.85; }
+.contact-links { display: flex; flex-direction: column; gap: 1rem; }
+.contact-link { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border: 1px solid var(--border); border-radius: 6px; background: var(--bg2); text-decoration: none; color: var(--text); transition: border-color 0.2s, transform 0.2s; }
+.contact-link:hover { border-color: var(--accent); transform: translateX(4px); }
+.contact-link-icon { font-family: var(--mono); font-size: 0.8rem; color: var(--accent); min-width: 90px; letter-spacing: 0.05em; }
+.contact-link-label { font-size: 0.9rem; color: var(--muted); }
+footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border); font-family: var(--mono); font-size: 0.75rem; color: var(--muted); letter-spacing: 0.05em; }
+.section-divider { max-width: 900px; margin: 0 auto; height: 1px; background: var(--border); }
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 680px) {
+  .nav-links { display: none; }
+  .hero-inner { flex-direction: column-reverse; align-items: flex-start; gap: 2rem; }
+  .hero-photo { width: 130px; height: 130px; }
+  .about-grid { grid-template-columns: 1fr; }
+  .contact-wrapper { grid-template-columns: 1fr; }
+  .hero-name { font-size: 2.2rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">~/himiguel</div>
+  <div class="nav-links">
+    <a href="#about">about</a>
+    <a href="#certifications">certs</a>
+    <a href="#skills">skills</a>
+    <a href="#projects">projects</a>
+    <a href="#contact">contact</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-inner">
+
+    <div class="hero-text">
+      <p class="hero-prompt">$ whoami</p>
+      <h1 class="hero-name">Hi, I'm <strong>Miguel</strong></h1>
+      <p class="hero-role">Aspiring SOC Analyst<span class="hero-cursor"></span></p>
+      <p class="hero-desc">
+        Cybersecurity student focused on threat detection, incident response,
+        and blue team operations. Preparing for CompTIA Security+ and
+        Cisco CyberOps Associate. Open to work in Spain or remote.
+      </p>
+      <div class="hero-badges">
+        <span class="status-badge">CompTIA Sec+ · In Progress</span>
+        <span class="status-badge blue">CyberOps Associate · In Progress</span>
+        <span class="status-badge">Open to Work</span>
+      </div>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary">Contact me</a>
+        <a href="#projects" class="btn btn-outline">View projects</a>
+      </div>
+    </div>
+
+    <!-- FOTO DE PERFIL
+         El archivo debe llamarse avatar.jpg y estar en la raíz del repo.
+         Si usas pfpmaker.com descarga el resultado como avatar.jpg.
+         object-position: center top → recorta priorizando la cara. -->
+    <div class="hero-photo-wrap">
+      <img
+        src="avatar.jpg"
+        alt="Miguel — Cybersecurity Student"
+        class="hero-photo"
+      />
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="about" class="fade-in">
+  <p class="section-label">// 01</p>
+  <h2 class="section-title">About me</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a <span>cybersecurity student</span> based in Spain, working toward a career as a SOC Analyst. After years of professional experience in other fields, I made a deliberate decision to transition into information security — a field I'm genuinely passionate about.</p>
+      <p>I spend time daily practicing on <span>TryHackMe</span>, working through Blue Team and SOC-focused learning paths. I enjoy understanding how attacks work so I can better detect and respond to them.</p>
+      <p>My focus: <span>threat detection</span>, <span>log analysis</span>, <span>network traffic analysis</span>, and <span>incident response</span>.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card">
+        <p class="stat-label">// STATUS</p>
+        <p class="stat-value">Open to work · Available now</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">// LOCATION</p>
+        <p class="stat-value">Spain · Remote-friendly</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">// FOCUS</p>
+        <p class="stat-value">Blue Team · SOC Operations</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">// LANGUAGES</p>
+        <p class="stat-value">Spanish (native) · English (learning)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="certifications" class="fade-in">
+  <p class="section-label">// 02</p>
+  <h2 class="section-title">Certifications</h2>
+
+  <div class="cert-grid">
+    <div class="cert-card">
+      <span class="cert-status in-progress">IN PROGRESS</span>
+      <p class="cert-name">CompTIA Security+</p>
+      <p class="cert-code">Exam SY0-701</p>
+    </div>
+    <div class="cert-card">
+      <span class="cert-status in-progress">IN PROGRESS</span>
+      <p class="cert-name">Cisco CyberOps Associate</p>
+      <p class="cert-code">Exam 200-201 CBROPS</p>
+    </div>
+  </div>
+
+  <div class="credly-section">
+    <p class="credly-title">// EARNED BADGES — CREDLY (22)</p>
+    <div class="credly-badges">
+
+      <!-- 01 · CCST Cybersecurity -->
+      <div data-iframe-width="150" data-iframe-height="270"
+           data-share-badge-id="b3f705c3-515c-4567-bb87-ca8afbffe4fb"
+           data-share-badge-host="https://www.credly.com"></div>
+
+      <!-- 02 · Cloud Security -->
+      <div data-iframe-width="150" data-iframe-height="270"
+           data-share-badge-id="5b56fe11-b0dd-4bd2-a406-7b2aa2ced24c"
+           data-share-badge-host="https://www.credly.com"></div>
+
+      <!-- 03 · Cybersecurity Fundamentals -->
+      <div data-iframe-width="150" data-iframe-height="270"
+           data-share-badge-id="fbc4a362-d1fc-45ad-b4f3-c5d138484408"
+           data-share-badge-host="https://www.credly.com"></div>
+
+      <!-- 04 · Cyber Threat Management -->
+      <div data-iframe-width="150" data-iframe-height="270"
+           data-share-badge-id="9ba94531-ad47-4c24-b84b-f8db2fd27014"
+           data-share-badge-host="https://www.credly.com"></div>
+
+      <!-- 05 · Endpoint Security -->
+      <div data-iframe-width="150" data-iframe-height="270"
+           data-share-badge-id="ad818991-05fa-49e1-944a-e7b382c428a5"
+           data-share-badge-host="https://www.credly.com"></div>
+
+      <!-- 06 · Fortinet Certified Fundamentals Cybersecurity -->
+      <div data-iframe-width="150" data-iframe-height="270"
+           data-share-badge-id="fa757418-8243-4220-b3c9-4c76e508c576"
+           data-share-badge-host="https://www.credly.com"></div>
+
+      <!-- 07 · Getting Started in Cybersecurity 3.0 -->
+      <div data-iframe-width="150" data-iframe-height="270"
+           data-share-badge-id="4de2b980-fdc9-40c5-926d-12d32128e2af"
+           data-share-badge-host="https://www.credly.com"></div>
+
+      <!-- 08 · Google Cybersecurity Professional Certificate V2 -->
+      <div data-iframe-width="150" data-iframe-height="270"
+           data-share-badge-id="555ef3d1-5516-4ef0-bba8-29ed30dc7249"
+           data-share-badge-host="https://www.credly.com"></div>
+
+      <!-- 09 · Governance, Risk, Compliance, and Data Privacy -->
+      <div data-iframe-width="150" data-iframe-height="270"
+           data-share-badge-id="9226c89f-487f-4da7-889f-d8e81483f829"
+           data-share-badge-host="https://www.credly.com"></div>
+
+      <!-- 10 · IBM SkillsBuild Cybersecurity Certificate -->
+      <div data-iframe-width="150" data-iframe-height="270"
+           data-share-badge-id="d55f2c4d-7a25-4ad0-9f7f-d69f88071783"
+           data-share-badge-host="https://www.credly.com"></div>
+
+      <!-- 11 · Incident Response and Systems Forensics -->
+      <div data-iframe-width="150" data-iframe-height="270"
+           data-share-badge-id="5c779cfc-da75-4f30-819f-f984ee086e7e"
+           data-share-badge-host="https://www.credly.com"></div>
+
+      <!-- 12 · Introduction to Cybersecurity -->
+      <div data-iframe-width="150" data-iframe-height="270"
+           data-share-badge-id="3edd2a06-7b47-4ffb-accf-905daf332e91"
+           data-share-badge-host="https://www.credly.com"></div>
+
+      <!-- 13 · Introduction to Modern AI -->
+      <div data-iframe-width="150" data-iframe-height="270"
+           data-share-badge-id="452e803f-d7cd-481f-833a-23c6bd5ae34d"
+           data-share-badge-host="https://www.credly.com"></div>
+
+      <!-- 14 · Introduction to the Threat Landscape 3.0 -->
+      <div data-iframe-width="150" data-iframe-height="270"
+           data-share-badge-id="106fa191-7e30-434f-9f0a-4715643bd3ab"
+           data-share-badge-host="https://www.credly.com"></div>
+
+      <!-- 15 · Junior Cybersecurity Analyst Career Path -->
+      <div data-iframe-width="150" data-iframe-height="270"
+           data-share-badge-id="40902979-9bab-46e0-b757-3f2450e2788d"
+           data-share-badge-host="https://www.credly.com"></div>
+
+      <!-- 16 · Network Defense -->
+      <div data-iframe-width="150" data-iframe-height="270"
+           data-share-badge-id="338fbc32-aa50-43f8-aea6-94876af9843d"
+           data-share-badge-host="https://www.credly.com"></div>
+
+      <!-- 17 · Networking Basics -->
+      <div data-iframe-width="150" data-iframe-height="270"
+           data-share-badge-id="c7fdcb9a-bd4a-496f-a2eb-598d5c9e98c0"
+           data-share-badge-host="https://www.credly.com"></div>
+
+      <!-- 18 · Networking Devices and Initial Configuration -->
+      <div data-iframe-width="150" data-iframe-height="270"
+           data-share-badge-id="05d439c6-c606-48f3-9eec-906b1558b3d8"
+           data-share-badge-host="https://www.credly.com"></div>
+
+      <!-- 19 · Security Operations and Management -->
+      <div data-iframe-width="150" data-iframe-height="270"
+           data-share-badge-id="fe1e5b58-8f6c-499a-a4a2-a0dec9186937"
+           data-share-badge-host="https://www.credly.com"></div>
+
+      <!-- 20 · System and Network Security -->
+      <div data-iframe-width="150" data-iframe-height="270"
+           data-share-badge-id="fbe8ca2d-bba7-4a00-ba8f-bc779e5600ce"
+           data-share-badge-host="https://www.credly.com"></div>
+
+      <!-- 21 · Technical Introduction to Cybersecurity 2.0 -->
+      <div data-iframe-width="150" data-iframe-height="270"
+           data-share-badge-id="97bda7d1-530c-404b-a02b-3419ed5c6fca"
+           data-share-badge-host="https://www.credly.com"></div>
+
+      <!-- 22 · Vulnerability Management -->
+      <div data-iframe-width="150" data-iframe-height="270"
+           data-share-badge-id="64cd2376-0412-4cc3-b379-f5857256a021"
+           data-share-badge-host="https://www.credly.com"></div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="tryhackme" class="fade-in">
+  <p class="section-label">// 03</p>
+  <h2 class="section-title">TryHackMe</h2>
+  <div class="thm-wrapper">
+    <a href="https://tryhackme.com/p/Himiguel" target="_blank" rel="noopener">
+      <img src="thm.png" alt="TryHackMe profile Himiguel" style="max-width:400px; width:100%;"/>
+    </a>
+    <a href="https://tryhackme.com/p/Himiguel" target="_blank" rel="noopener" class="thm-link">
+      View full profile →
+    </a>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="skills" class="fade-in">
+  <p class="section-label">// 04</p>
+  <h2 class="section-title">Skills & Tools</h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <p class="skill-group-title">// OS & ENVIRONMENTS</p>
+      <div class="skill-list">
+        <span class="skill-item">Linux / Ubuntu</span>
+        <span class="skill-item">Windows Server</span>
+        <span class="skill-item">VirtualBox / VMs</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-title">// NETWORK ANALYSIS</p>
+      <div class="skill-list">
+        <span class="skill-item">Wireshark</span>
+        <span class="skill-item">tcpdump</span>
+        <span class="skill-item">Nmap</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-title">// SECURITY TOOLS</p>
+      <div class="skill-list">
+        <span class="skill-item">Splunk (SIEM)</span>
+        <span class="skill-item">Snort (IDS/IPS)</span>
+        <span class="skill-item">Metasploit</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-title">// SCRIPTING</p>
+      <div class="skill-list">
+        <span class="skill-item">Bash</span>
+        <span class="skill-item">Python (basics)</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-title">// CONCEPTS</p>
+      <div class="skill-list">
+        <span class="skill-item">CIA Triad</span>
+        <span class="skill-item">OSI / TCP-IP Model</span>
+        <span class="skill-item">Incident Response</span>
+        <span class="skill-item">Threat Detection</span>
+        <span class="skill-item">Log Analysis</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-title">// FRAMEWORKS</p>
+      <div class="skill-list">
+        <span class="skill-item">MITRE ATT&amp;CK</span>
+        <span class="skill-item">NIST CSF</span>
+        <span class="skill-item">Kill Chain</span>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top:1.5rem; font-family: var(--mono); font-size: 0.75rem; color: var(--muted);">
+    // Only listing tools I can discuss in an interview
+  </p>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="projects" class="fade-in">
+  <p class="section-label">// 05</p>
+  <h2 class="section-title">Projects & Write-ups</h2>
+  <div class="projects-grid">
+    <div class="coming-soon">
+      $ ls ./projects/<br/><br/>
+      Building in progress... Check back soon.
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="contact" class="fade-in">
+  <p class="section-label">// 06</p>
+  <h2 class="section-title">Contact</h2>
+  <div class="contact-wrapper">
+    <div class="contact-text">
+      <p>I'm actively looking for entry-level opportunities in cybersecurity — SOC Analyst, Junior Security Analyst, or similar roles.</p>
+      <br/>
+      <p>If you're hiring or want to connect, reach out on LinkedIn or find me on GitHub and TryHackMe.</p>
+    </div>
+    <div class="contact-links">
+      <a href="https://www.linkedin.com/in/Himiguel" target="_blank" rel="noopener" class="contact-link">
+        <span class="contact-link-icon">// LinkedIn</span>
+        <span class="contact-link-label">Connect with me →</span>
+      </a>
+      <a href="https://github.com/Himiguel" target="_blank" rel="noopener" class="contact-link">
+        <span class="contact-link-icon">// GitHub</span>
+        <span class="contact-link-label">github.com/Himiguel →</span>
+      </a>
+      <a href="https://tryhackme.com/p/Himiguel" target="_blank" rel="noopener" class="contact-link">
+        <span class="contact-link-icon">// TryHackMe</span>
+        <span class="contact-link-label">tryhackme.com/p/Himiguel →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Himiguel · Cybersecurity Portfolio · Built with GitHub Pages</p>
+</footer>
+
+<script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
